@@ -109,8 +109,25 @@ const ART={
   cap:`<path d="M60 130 C60 76 76 44 100 44 C124 44 140 76 140 130 Z"/><line x1="60" y1="118" x2="140" y2="118"/><line x1="60" y1="128" x2="140" y2="128"/>`,
   belt:`<rect x="30" y="112" width="120" height="16" rx="2"/><rect x="148" y="104" width="26" height="32" rx="3"/><circle cx="161" cy="120" r="4"/><circle cx="46" cy="120" r="1.6" fill="currentColor"/><circle cx="60" cy="120" r="1.6" fill="currentColor"/><circle cx="74" cy="120" r="1.6" fill="currentColor"/>`
 };
+const UNSPLASH = {
+  coat: '1539533113208-f6df8cc8b543',
+  jacket: '1559551409-dadc959f76b8',
+  bomber: '1520975954732-57dd22299614',
+  trench: '1520854221256-17451cc331bf',
+  sweater: '1614252235316-84d0d465d644',
+  cardigan: '1620799140408-edc6dcb6d633',
+  halfzip: '1556821840-3a63f95609a7',
+  turtleneck: '1582213706037-7756f7ef59b8',
+  jeans: '1541099649105-f69ad21f3246',
+  trouser: '1624378439575-d8705ad7ae80',
+  tee: '1521572163474-6864f9cf17ab',
+  bag: '1590874103328-eac38a683ce7',
+  cap: '1588850561407-ed78c282e89b',
+  belt: '1553062407-98eeb64c6a62'
+};
 function art(type){
-  return `<svg viewBox="0 0 200 240" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ART[type]||ART.tee}${PIN}</svg>`;
+  const imgId = UNSPLASH[type] || '1521572163474-6864f9cf17ab';
+  return `<img src="https://images.unsplash.com/photo-${imgId}?w=500&h=600&fit=crop" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;" alt="${type}">`;
 }
 
 /* ============================================================
