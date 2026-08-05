@@ -348,8 +348,8 @@ function viewHome(){
       <h1>Clothing built<br>for the whole <em>map</em>.</h1>
       <p class="hero__sub">Urban Planet designs a small, considered wardrobe — outerwear, knitwear, denim and basics — cut to travel well and last past the season it was bought in.</p>
       <div class="hero__acts">
-        <a href="#/shop" class="btn btn--gold">Shop the drop</a>
-        <a href="#/about" class="btn">Our approach</a>
+        <a href="shop.html" class="btn btn--gold">Shop the drop</a>
+        <a href="about.html" class="btn">Our approach</a>
       </div>
       <div class="hero__stats">
         <div><b>40+</b><span>Countries shipped</span></div>
@@ -379,7 +379,7 @@ function viewHome(){
       <div class="sechd rv">
         <h2>Most<br>worn</h2>
         <p>The styles that get reordered the most, straight from our own dispatch numbers.</p>
-        <a href="#/shop" class="btn btn--sm" style="margin-top:auto">View all</a>
+        <a href="shop.html" class="btn btn--sm" style="margin-top:auto">View all</a>
       </div>
       <div class="rv">${grid(bestsellers)}</div>
     </div>
@@ -390,7 +390,7 @@ function viewHome(){
       <span class="eyebrow">The Approach</span>
       <h2 style="margin-top:18px">Fewer pieces.<br>Worn more.</h2>
       <p>We publish one small collection a season instead of chasing weekly drops. Every piece is designed to sit next to the last one without going out of date — so the twenty styles in the catalogue today are still the twenty you'll want next year.</p>
-      <a href="#/about" class="btn" style="margin-top:24px;width:fit-content">Read the full approach</a>
+      <a href="about.html" class="btn" style="margin-top:24px;width:fit-content">Read the full approach</a>
     </div>
     <div class="editorial__num">
       <div><b>92%</b><span>Natural fibre across the line</span></div>
@@ -428,14 +428,14 @@ function viewHome(){
 function collCard(cat,label,desc){
   const cnt=PRODUCTS.filter(p=>p.cat===cat).length;
   const rep=PRODUCTS.find(p=>p.cat===cat);
-  return `<a href="#/shop?cat=${cat}" class="coll">
+  return `<a href="shop.html?cat=${cat}" class="coll">
     <div class="coll__art">${art(rep.type)}</div>
     <div class="coll__grad"></div>
     <div class="coll__body">
       <span class="coord">${cnt} styles</span>
       <h3>${label}</h3>
-      <span style="display:block;color:var(--paper-dim);font-size:13px;max-width:26ch">${desc}</span>
-      <a href="#/shop?cat=${cat}">Browse ${label.toLowerCase()} →</a>
+      <span class="coll__desc">${desc}</span>
+      <span class="coll__link">Browse ${label.toLowerCase()} <span class="arr">→</span></span>
     </div>
   </a>`;
 }
@@ -529,7 +529,7 @@ function viewProduct(id){
   const related=PRODUCTS.filter(x=>x.cat===p.cat&&x.id!==p.id).slice(0,4);
   return `
   <div class="wrap" style="padding-top:20px">
-    <div class="crumbs"><a href="#/">Home</a><span>/</span><a href="#/shop?cat=${p.cat}">${CATS.find(c=>c[0]===p.cat)[1]}</a><span>/</span><span>${p.name}</span></div>
+    <div class="crumbs"><a href="#/">Home</a><span>/</span><a href="shop.html?cat=${p.cat}">${CATS.find(c=>c[0]===p.cat)[1]}</a><span>/</span><span>${p.name}</span></div>
   </div>
   <div class="pd">
     <div class="pd__gallery">
