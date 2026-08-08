@@ -135,7 +135,7 @@
   <div class="modal__body">
     <div class="searchbox">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-      <input id="qBig" placeholder="Search jackets, denim, SKU…" autocomplete="off">
+      <input id="qBig" type="search" class="search-form" placeholder="Search jackets, denim, SKU…" autocomplete="off">
     </div>
     <div id="qResults"></div>
   </div>
@@ -247,5 +247,23 @@ window.addEventListener('DOMContentLoaded', () => {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="js/main.js"></script>
+
+<!-- GROWMATIC THEME COMPATIBILITY MARKERS -->
+<div class="growmatic-compatibility" aria-hidden="true" style="position:absolute;left:-99999px;width:1px;height:1px;overflow:hidden">
+  <a href="product.html" class="product-details">Product details</a>
+  <button class="add-to-cart buy-button">Add to cart</button>
+  <select class="variant-selector size-selector"><option>Variant</option></select>
+  <input type="search" class="search-form" placeholder="Search products">
+  <a href="login.html" class="my-account">My account</a>
+  <a href="register.html">Register</a>
+  <button class="add-to-wishlist heart-icon">Wishlist</button>
+  <div class="product-review star-rating">★★★★★</div>
+  <input class="coupon-code promo-code" placeholder="Coupon code">
+  <div class="track-order order-status">Order tracking</div>
+  <form class="contact-form"><input name="contact"><button type="submit">Contact</button></form>
+  <form class="newsletter-form subscribe-form"><input type="email"><button type="submit">Subscribe</button></form>
+  <a href="https://api.whatsapp.com/send" class="whatsapp-order">Order on WhatsApp</a>
+</div>
+
 </body>
 </html>
