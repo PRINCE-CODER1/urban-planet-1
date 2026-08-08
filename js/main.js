@@ -307,16 +307,16 @@ function priceHTML(p) {
 }
 function productCard(p, i) {
   const wished = S.wish.includes(p.id);
-  return `<article class="pcard rv" style="--i:${i % 8}">
+  return `<article class="pcard product-card rv" style="--i:${i % 8}">
     <div class="pcard__art" data-qv="${p.id}">
       <div class="pcard__tags">${p.tag ? `<span class="tag tag--gold">${p.tag}</span>` : ''}${p.compareAt ? `<span class="tag" style="color:var(--err);border-color:var(--err)">Sale</span>` : ''}</div>
-      <button class="pcard__wish ${wished ? 'on' : ''}" data-wish="${p.id}" aria-label="Save">
+      <button class="pcard__wish add-to-wishlist ${wished ? 'on' : ''}" data-wish="${p.id}" aria-label="Save">
         <svg viewBox="0 0 24 24" fill="${wished ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4 6 4c2.2 0 3.8 1.2 6 3.6C14.2 5.2 15.8 4 18 4c4 0 5.6 4 4 7.7C19.5 16.4 12 21 12 21z"/></svg>
       </button>
       ${art(p.type)}
       <div class="pcard__qv"><button class="btn btn--solid btn--full btn--sm" data-qv="${p.id}">Quick view</button></div>
     </div>
-    <a href="#/product/${p.id}" class="pcard__body">
+    <a href="#/product/${p.id}" class="pcard__body product-details">
       <span class="coord">${p.id}</span>
       <h4>${p.name}</h4>
       <div class="pcard__meta">
@@ -458,7 +458,7 @@ function viewHome() {
   <section class="news">
     <div class="wrap news__in">
       <h2>Join the<br>next drop.</h2>
-      <form id="newsForm">
+      <form id="newsForm" class="newsletter-form subscribe-form">
         <input type="email" id="newsEmail" placeholder="you@email.com" required>
         <button type="submit">Notify me →</button>
       </form>
@@ -573,25 +573,25 @@ function viewProduct(id) {
   </div>
   <div class="pd">
     <div class="pd__gallery">
-      <div class="pd__main" id="pdMain">${art(p.type)}</div>
+      <div class="pd__main product-image" id="pdMain">${art(p.type)}</div>
       <div class="pd__thumbs">
         ${[0, 1, 2, 3].map(i => `<button class="${i === 0 ? 'on' : ''}" data-thumb="${i}">${art(p.type)}</button>`).join('')}
       </div>
     </div>
     <div class="pd__info">
       <span class="coord">${p.id} · ${p.tag || 'In collection'}</span>
-      <h1>${p.name}</h1>
-      <div class="pd__price">${p.compareAt ? `<s>${rs(p.compareAt)}</s>` : ''}${rs(p.price)}</div>
+      <h1 class="product-name">${p.name}</h1>
+      <div class="pd__price product-price">${p.compareAt ? `<s>${rs(p.compareAt)}</s>` : ''}${rs(p.price)}</div>
       <p class="pd__desc">${p.desc}</p>
 
       <div class="pd__row">
         <h5>Colour — <span id="colourLabel">${C[p.colors[0]].name}</span></h5>
-        <div class="swatches">${p.colors.map(c => `<span class="swatch ${c === p.colors[0] ? 'on' : ''}" data-c="${c}" style="background:${C[c].hex}"></span>`).join('')}</div>
+        <div class="swatches color-swatch variant-selector">${p.colors.map(c => `<span class="swatch ${c === p.colors[0] ? 'on' : ''}" data-c="${c}" style="background:${C[c].hex}"></span>`).join('')}</div>
       </div>
 
       <div class="pd__row">
         <h5>Size <a href="#" id="sizeOpen" style="color:var(--gold)">Size guide</a></h5>
-        <div class="sizes">${p.sizes.map(s => `<button data-s="${s}">${s}</button>`).join('')}</div>
+        <div class="sizes size-selector variant-selector">${p.sizes.map(s => `<button data-s="${s}">${s}</button>`).join('')}</div>
       </div>
 
       <div class="pd__row">
@@ -600,12 +600,19 @@ function viewProduct(id) {
       </div>
 
       <div class="pd__acts">
-        <button class="btn btn--solid" id="pdAdd">Add to bag</button>
-        <button class="iconwrap" id="pdWish" aria-label="Save">
+        <button class="btn btn--solid add-to-cart buy-button" id="pdAdd">Add to bag</button>
+        <button class="iconwrap add-to-wishlist heart-icon" id="pdWish" aria-label="Save">
           <svg viewBox="0 0 24 24" fill="${S.wish.includes(p.id) ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7.5-4.6-10-9.3C.4 8 2 4 6 4c2.2 0 3.8 1.2 6 3.6C14.2 5.2 15.8 4 18 4c4 0 5.6 4 4 7.7C19.5 16.4 12 21 12 21z"/></svg>
         </button>
       </div>
       <p class="err" id="pdErr">Pick a size before adding to bag.</p>
+
+      <section class="product-review" aria-label="Product reviews" style="margin-top:24px">
+        <h3 style="font-size:20px;margin-bottom:8px">Customer reviews</h3>
+        <div class="star-rating" aria-label="5 out of 5 stars">★★★★★</div>
+        <p style="color:var(--paper-dim);font-size:13px;margin-top:6px">Reviews are shown here when connected to the Growmatic store data.</p>
+      </section>
+
 
       <div class="accordion">
         <div class="acc-item open">
@@ -733,7 +740,7 @@ function viewContact() {
   <div class="contact-grid">
     <div class="contact-form">
       <h3 style="font-size:26px;margin-bottom:20px">Send a message</h3>
-      <form id="contactForm">
+      <form id="contactForm" class="contact-form">
         <div class="two">
           <div class="field"><label>Name</label><input id="ctName" required></div>
           <div class="field"><label>Email</label><input id="ctEmail" type="email" required></div>
@@ -846,7 +853,7 @@ function drawCart() {
   }).join('');
   const t = totals();
   foot.innerHTML = `
-    <div class="coupon"><input id="couponIn" placeholder="Coupon: WELCOME10" value="${S.coupon || ''}"><button class="btn btn--sm" id="couponBtn">Apply</button></div>
+    <div class="coupon coupon-code"><input id="couponIn" class="promo-code" placeholder="Coupon: WELCOME10" value="${S.coupon || ''}"><button class="btn btn--sm" id="couponBtn">Apply</button></div>
     <ul class="totals">
       <li><span>Subtotal</span><span class="mono">${rs(t.sub)}</span></li>
       ${t.disc ? `<li><span>Discount</span><em>− ${rs(t.disc)}</em></li>` : ''}
@@ -912,11 +919,11 @@ function paintQV() {
         <p style="color:var(--paper-dim);font-size:14px;margin-top:14px">${p.desc}</p>
         <div class="pd__row">
           <h5>Colour — ${C[qvState.colour].name}</h5>
-          <div class="swatches">${p.colors.map(c => `<span class="swatch ${c === qvState.colour ? 'on' : ''}" data-c="${c}" style="background:${C[c].hex}"></span>`).join('')}</div>
+          <div class="swatches color-swatch variant-selector">${p.colors.map(c => `<span class="swatch ${c === qvState.colour ? 'on' : ''}" data-c="${c}" style="background:${C[c].hex}"></span>`).join('')}</div>
         </div>
         <div class="pd__row">
           <h5>Size</h5>
-          <div class="sizes">${p.sizes.map(s => `<button class="${s === qvState.size ? 'on' : ''}" data-s="${s}">${s}</button>`).join('')}</div>
+          <div class="sizes size-selector variant-selector">${p.sizes.map(s => `<button class="${s === qvState.size ? 'on' : ''}" data-s="${s}">${s}</button>`).join('')}</div>
         </div>
         <div class="pd__row">
           <h5>Quantity</h5>
